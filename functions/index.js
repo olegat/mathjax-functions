@@ -14,14 +14,15 @@ const {RegisterHTMLHandler} = require('mathjax-full/js/handlers/html.js');
 function convert(math, InOut) {
   const adaptor = liteAdaptor();
   RegisterHTMLHandler(adaptor);
-  const html = mathjax.document('', InOut);
-  const output = html.convert(math);
-  console.log(output.text);
-  return adaptor.outerHTML(output);
+  const html    = mathjax.document('', InOut);
+  const output  = html.convert(math);
+  const content = adaptor.outerHTML(output.children[0]);
+  return content;
 }
 
 exports.tex2svg = functions.https.onRequest((request, response) => {
-  const math = request._parsedUrl.query;
+  const math = decodeURIComponent(request._parsedUrl.query);
+  response.set('Content-Type', 'image/svg+xml');
   return response.send(convert(math, {
     InputJax: new TeX(),
     OutputJax: new SVG()
