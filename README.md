@@ -1,7 +1,8 @@
-# Mathjax Firebase Functions
+# Mathjax Cloud Functions
 
-Current there is only one firebase function (`tex2svg`), but more may
-be added in the future.
+Current there is only one cloud function (`tex2svg`), but more may be
+added in the future. The current project uses Firebase functions, but
+may be switched to a different provider at some point.
 
 ## tex2svg
 
